@@ -9,30 +9,36 @@
       window.addEventListener('DOMContentLoaded', async () => {
         const output = document.querySelector('#output');
 
-        if (typeof DeviceMotionEvent?.requestPermission === 'function') {
-          try {
-            output.textContent += 'Requesting Permission\n';
-            console.log('request');
-            const res = await DeviceMotionEvent.requestPermission();
-            output.textContent += `Response: ${res}\n`;
-          } catch (error) {
-            output.textContent += `Error: ${error}\n`;
+        document.querySelector('#request').addEventListener('click', () => {
+          if (typeof DeviceMotionEvent?.requestPermission === 'function') {
+            try {
+              output.textContent += 'Requesting Permission\n';
+              const res = await DeviceMotionEvent.requestPermission();
+              output.textContent += `Response: ${res}\n`;
+            } catch (error) {
+              output.textContent += `Error: ${error}\n`;
+            }
+          } else {
+            output.textContent += `Error: DeviceMotionEvent.requestPermission() is not a function!\n`;
           }
-        }
+        });
+
+
 
         output.textContent += 'Loaded!\n';
-        window.addEventListener('devicemotion', (event) => {
-          output.textContent += `Motion Event:\n${JSON.stringify(event, null, 4)}\n\n`;
-        });
+        // window.addEventListener('devicemotion', (event) => {
+        //   output.textContent += `Motion Event:\n${JSON.stringify(event, null, 4)}\n\n`;
+        // });
 
-        window.addEventListener('deviceorientation', (event) => {
-          output.textContent += `Orientation Event:\n${JSON.stringify(event, null, 4)}\n\n`;
-        });
+        // window.addEventListener('deviceorientation', (event) => {
+        //   output.textContent += `Orientation Event:\n${JSON.stringify(event, null, 4)}\n\n`;
+        // });
 
       });
     </script>
   </head>
   <body>
+    <button type="button" id="request">Request Permission</button>
     <div id="output">
     </div>
   </body>
