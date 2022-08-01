@@ -16,9 +16,9 @@
               if (res === 'granted') {
                 window.addEventListener('devicemotion', (event) => {
                   const {acceleration, accelerationIncludingGravity, rotationRate, interval } = event;
-                  document.querySelector('#motion_acceleration').textContent = acceleration;
-                  document.querySelector('#motion_accelerationIncludingGravity').textContent = accelerationIncludingGravity;
-                  document.querySelector('#motion_rotationRate').textContent = rotationRate;
+                  document.querySelector('#motion_acceleration').textContent = `${JSON.stringify(acceleration)}`;
+                  document.querySelector('#motion_accelerationIncludingGravity').textContent = `${JSON.stringify(accelerationIncludingGravity)}`;
+                  document.querySelector('#motion_rotationRate').textContent = `${JSON.stringify(rotationRate)}`;
                   document.querySelector('#motion_interval').textContent = interval;
                 });
               }
@@ -37,10 +37,10 @@
               if (res === 'granted') {
                 window.addEventListener('deviceorientation', (event) => {
                   const { absolute, alpha, beta, gamma } = event;
-                  document.querySelector('#orient_absolute').textContent = absolute;
+                  document.querySelector('#orient_absolute').textContent = absolute ? 'Yes' : 'No';
                   document.querySelector('#orient_alpha').textContent = alpha;
                   document.querySelector('#orient_beta').textContent = beta;
-                  document.querySelector('#orient_gamme').textContent = gamma;
+                  document.querySelector('#orient_gamma').textContent = gamma;
                 });
               }
             } catch (error) {
