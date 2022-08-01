@@ -6,10 +6,10 @@
       }
     </style>
     <script>
-      window.addEventListener('DOMContentLoaded', async () => {
+      window.addEventListener('DOMContentLoaded', () => {
         const output = document.querySelector('#output');
 
-        document.querySelector('#request').addEventListener('click', () => {
+        document.querySelector('#request').addEventListener('click', async () => {
           if (typeof DeviceMotionEvent?.requestPermission === 'function') {
             try {
               output.textContent += 'Requesting Permission\n';
