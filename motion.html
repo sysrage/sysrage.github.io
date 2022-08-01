@@ -15,9 +15,11 @@
               output.textContent += `Response: ${res}\n`;
               if (res === 'granted') {
                 window.addEventListener('devicemotion', (event) => {
-                  const { acceleration, accelerationIncludingGravity, rotationRate, interval } = event;
-                  output.textContent += `Motion Event:\n${JSON.stringify({ acceleration, accelerationIncludingGravity, rotationRate, interval }, null, 4)}\n\n`;
-//                   output.textContent += `Motion Event:\n${JSON.stringify(event, null, 4)}\n\n`;
+                  const {acceleration, accelerationIncludingGravity, rotationRate, interval } = event;
+                  document.querySelector('#motion_acceleration').textContent = acceleration;
+                  document.querySelector('#motion_accelerationIncludingGravity').textContent = accelerationIncludingGravity;
+                  document.querySelector('#motion_rotationRate').textContent = rotationRate;
+                  document.querySelector('#motion_interval').textContent = interval;
                 });
               }
             } catch (error) {
@@ -35,8 +37,10 @@
               if (res === 'granted') {
                 window.addEventListener('deviceorientation', (event) => {
                   const { absolute, alpha, beta, gamma } = event;
-                  output.textContent += `Motion Event:\n${JSON.stringify({ absolute, alpha, beta, gamma }, null, 4)}\n\n`;
-//                   output.textContent += `Orientation Event:\n${JSON.stringify(event, null, 4)}\n\n`;
+                  document.querySelector('#orient_absolute').textContent = absolute;
+                  document.querySelector('#orient_alpha').textContent = alpha;
+                  document.querySelector('#orient_beta').textContent = beta;
+                  document.querySelector('#orient_gamme').textContent = gamma;
                 });
               }
             } catch (error) {
@@ -53,7 +57,23 @@
     </script>
   </head>
   <body>
-    <button type="button" id="request">Request Permission</button>
+    <div>
+      <button type="button" id="request">Request Permission</button>
+    </div>
+    <div>
+      <h3>Motion Event Data</h3>
+      <b>acceleration:</b> <span id="motion_acceleration"></span><br />
+      <b>accelerationIncludingGravity</b> <span id="motion_accelerationIncludingGravity"></span><br />
+      <b>rotationRate</b> <span id="motion_rotationRate"></span><br />
+      <b>interval</b> <span id="motion_interval"></span>
+    </div>
+    <div>
+      <h3>Orientation Event Data</h3>
+      <b>absolute:</b> <span id="orient_absolute"></span><br />
+      <b>alpha</b> <span id="orient_alpha"></span><br />
+      <b>beta</b> <span id="orient_beta"></span><br />
+      <b>gamma</b> <span id="orient_gamma"></span>
+    </div>
     <div id="output"></div>
   </body>
 </html>
